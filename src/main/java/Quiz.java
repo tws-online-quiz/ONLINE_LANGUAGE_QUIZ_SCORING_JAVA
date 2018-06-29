@@ -1,7 +1,11 @@
 public class Quiz {
-    public String runUserCode(String arg) {
-        // Setup: parse input from String and convert output to String
-        UserCode userCode = new UserCode();
-        return userCode.run(arg);
+    public String solution(String arg) {
+        // Write your code here...
+        return "";
+    }
+
+    // Do NOT modify below code
+    public String run(String arg) {
+        return solution(arg);
     }
 }

@@ -7,6 +7,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.junit.Test;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -18,14 +19,17 @@ public class QuizTest {
 
         JSONParser parser = new JSONParser();
         try {
-            JSONArray testData = (JSONArray) parser.parse(new FileReader("./test_data.json"));
+            ClassLoader classLoader = getClass().getClassLoader();
+            File file = new File(classLoader.getResource("test_data.json").getFile());
+
+            JSONArray testData = (JSONArray) parser.parse(new FileReader(file));
             for (Object o: testData)
             {
                 JSONObject testEntry = (JSONObject) o;
                 String input = (String) testEntry.get("input");
                 String expectedOutput = (String) testEntry.get("expectedOutput");
 
-                assertEquals(expectedOutput, classUnderTest.runUserCode(input));
+                assertEquals(expectedOutput, classUnderTest.run(input));
             }
         } catch (ParseException | IOException e) {
             e.printStackTrace();
